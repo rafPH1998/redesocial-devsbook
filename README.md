@@ -1,33 +1,25 @@
-## Instalação
-Você pode clonar este repositório OU baixar o .zip
+Projeto rede social: Devsbook.
 
-Ao descompactar, é necessário rodar o **composer** pra instalar as dependências e gerar o *autoload*.
+1. Esse projeto tem como intuito colocar em prática os estudos em php, e também colocar a utilização de um padrão de projeto totalmente na prática.
 
-Vá até a pasta do projeto, pelo *prompt/terminal* e execute:
-> composer install
+2. Realizei esse projeto junto com a equipe b7web, que atualmente, é aonde estou realizando a minha formaçã
 
-Depois é só aguardar.
+3. Um projeto bastante desafiador onde eu aprendi bastante, de fato aprendi como algo bem organizado faz a diferença, e a organização nos nossos códigos faz toda a diferença
 
-## Configuração
-Todos os arquivos de **configuração** e aplicação estão dentro da pasta *src*.
+4. FUNCIONALIDADES DO PROJETO:
 
-As configurações de Banco de Dados e URL estão no arquivo *src/Config.php*
+- Fazer um cadastro de um usuário, com nome, idade, data de nascimento e uma senha
 
-É importante configurar corretamente a constante *BASE_DIR*:
-> const BASE_DIR = '/**PastaDoProjeto**/public';
+- Ao fazer o cadastro, poderá fazer um login e acessar o home da página
 
-## Uso
-Você deve acessar a pasta *public* do projeto.
+- No home da página, poderá:
+✓fazer um pos
+✓postar uma foto
+✓seguir um usuário e ver postagem dele
+✓curtir e comentar no post desse usuário
 
-O ideal é criar um ***alias*** específico no servidor que direcione diretamente para a pasta *public*.
+- A qualquer momento poderá excluir o determinado post que quiser, desde que ele seja seu(o usuário que estará logado)
 
-## Modelo de MODEL
-```php
-<?php
-namespace src\models;
-use \core\Model;
+- Ao clicar para excluir um posto, também será deletado todos os likes e comentários desse suposto posto que estará deletando
 
-class Usuario extends Model {
 
-}
-```
