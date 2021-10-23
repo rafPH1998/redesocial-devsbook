@@ -2,9 +2,9 @@ Projeto rede social: Devsbook.
 
 1. Esse projeto tem como intuito colocar em prática os estudos em php, e também colocar a utilização de um padrão de projeto totalmente na prática.
 
-2. Realizei esse projeto junto com a equipe b7web, que atualmente, é aonde estou realizando a minha formaçã
+2. Realizei esse projeto junto com a equipe b7web, que atualmente, é aonde estou realizando a minha formação e me especializando.
 
-3. Um projeto bastante desafiador onde eu aprendi bastante, de fato aprendi como algo bem organizado faz a diferença, e a organização nos nossos códigos faz toda a diferença
+3. Um projeto bastante desafiador onde eu aprendi muito, e de fato aprendi como a organização faz a diferença. organização em nossos códigos é essencial.
 
 4. FUNCIONALIDADES DO PROJETO:
 
