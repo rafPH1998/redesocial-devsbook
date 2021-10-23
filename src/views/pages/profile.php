@@ -1,0 +1,156 @@
+<?=$render('header', ['loggedUser' => $loggedUser]);?>
+    <section class="container main">
+    <?=$render('sidebar', ['activeMenu' => 'profile']);?>
+    <section class="feed">
+
+    <div class="row">
+        <div class="box flex-1 border-top-flat">
+            <div class="box-body">
+                <div class="profile-cover" style="background-image: url('<?=$base;?>/media/covers/<?=$user->cover;?>');"></div>
+                <div class="profile-info m-20 row">
+                    <div class="profile-info-avatar">
+                        <img src="<?=$base;?>/media/avatars/<?=$user->avatar;?>" />
+                    </div>
+                    <div class="profile-info-name">
+                        <div class="profile-info-name-text"><?=$user->name;?></div>
+                        <div class="profile-info-location"><?=$user->work;?></div>
+                    </div>
+                    <div class="profile-info-data row">
+
+                        <?php if($loggedUser->id != $user->id):?>
+                            <div class="profile-info-item m-width-20">
+                                <a class="button" href="<?=$base;?>/perfil/<?=$user->id;?>/follow"><?=(!$isFollowing) ? 'Seguir' : 'Deixar de Seguir';?></a>
+                            </div>
+                        <?php endif;?>
+
+                        <div class="profile-info-item m-width-20">
+                            <div class="profile-info-item-n"><?=count($user->followers);?></div>
+                            <div class="profile-info-item-s">Seguidores</div>
+                        </div>
+                        <div class="profile-info-item m-width-20">
+                            <div class="profile-info-item-n"><?=count($user->following);?></div>
+                            <div class="profile-info-item-s">Seguindo</div>
+                        </div>
+                        <div class="profile-info-item m-width-20">
+                            <div class="profile-info-item-n"><?=count($user->photo);?></div>
+                            <div class="profile-info-item-s">Fotos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="column side pr-5">
+            
+            <div class="box">
+                <div class="box-body">
+                    
+                    <div class="user-info-mini">
+                        <img src="<?=$base;?>/assets/images/calendar.png" />
+                        <?=date('d/m/Y', strtotime($user->birthdate));?>(<?=$user->ageYear;?> anos)
+                    </div>
+
+                    <?php if(!empty($user->city)):?>
+                        <div class="user-info-mini">
+                            <img src="<?=$base;?>/assets/images/pin.png" />
+                            <?=$user->city;?>
+                        </div>
+                    <?php endif;?>
+                    
+                    <?php if(!empty($user->work)):?>
+                        <div class="user-info-mini">
+                            <img src="assets/images/work.png" />
+                            <?=$user->work;?>
+                        </div>
+                    <?php endif;?>
+ 
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-header m-10">
+                    <div class="box-header-text">
+                        Seguindo
+                        <span><?=count($user->following);?></span>
+                    </div>
+                    <div class="box-header-buttons">
+                        <a href="<?=$base;?>/perfil/<?=$user->id;?>/amigos">ver todos</a>
+                    </div>
+                </div>
+                <div class="box-body friend-list">
+                    
+                    <?php for($q=0;$q<4;$q++):?>
+                        <?php if(isset($user->following[$q])):?>
+                            <div class="friend-icon">
+                                <a href="<?=$base;?>/perfil/<?=$user->following[$q]->id;?>">
+                                    <div class="friend-icon-avatar">
+                                        <img src="<?=$base;?>/media/avatars/<?=$user->following[$q]->avatar;?>" />
+                                    </div>
+                                    <div class="friend-icon-name">
+                                        <?=$user->following[$q]->name;?>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endif;?>
+                    <?php endfor;?>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="column pl-5">
+
+            <div class="box">
+                <div class="box-header m-10">
+                    <div class="box-header-text">
+                        Fotos
+                        <span>(<?=count($user->photo);?>)</span>
+                    </div>
+                    <div class="box-header-buttons">
+                        <a href="<?=$base;?>/perfil/<?=$user->id;?>/fotos">ver todos</a>
+                    </div>
+                </div>
+                <div class="box-body row m-20">
+                    
+                    <?php for($q=0;$q<5;$q++):?>
+                        <?php if(isset($user->photo[$q])):?>
+                            <div class="user-photo-item">
+                                <a href="#modal-<?=$user->photo[$q]->id;?>" rel="modal:open">
+                                    <img src="<?=$base;?>/media/uploads/<?=$user->photo[$q]->body;?>" />
+                                </a>
+                                <div id="modal-<?=$user->photo[$q]->id;?>" style="display:none">
+                                    <img src="<?=$base;?>/media/uploads/<?=$user->photo[$q]->body;?>" />
+                                </div>
+                            </div>
+                        <?php endif;?>
+                    <?php endfor;?>
+                    
+                </div>
+            </div>
+
+            <?=$render("feed-editor", ['loggedUser'=>$loggedUser]);?>
+            
+                <?php foreach($feed['posts'] as $feeds):?>
+                    <?=$render("feed-item", [
+                        'feeds' => $feeds,
+                        'loggedUser'=>$loggedUser
+                    ]);?>
+                <?php endforeach;?>
+
+                <div class="feed-pagination">
+                    <?php for($q=0;$q<$feed['pageCount'];$q++):?>
+                        <a class="<?=($q==$feed['currentPage'] ? 'active' : '');?>" href="<?=$base;?>/perfil/<?=$user->id;?>?page=<?=$q;?>"><?=$q+1;?></a>
+                    <?php endfor;?>
+                </div>
+                
+        </div>
+        
+    </div>
+
+</section>
+<?=$render('footer');
+
+     
